@@ -1,0 +1,40 @@
+# Neutron
+- name: Install Neutron packages
+  apt:
+    name:
+      - neutron-server
+      - neutron-plugin-ml2
+      - neutron-linuxbridge-agent
+      - neutron-dhcp-agent
+      - neutron-metadata-agent
+    state: latest
+
+- name: Neutron Starting / Enabling
+  service:
+    name: neutron-server
+    state: started
+    enabled: true
+
+# Horizon
+- name: Install Horizon package
+  apt:
+    name: openstack-dashboard
+    state: latest
+
+- name: Horizon Restarting / Enabling
+  service:
+    name: apache2.service
+    state: restarted
+    enabled: true
+
+# Cinder
+- name: Install Cinder package
+  apt:
+    name: cinder-volume
+    state: latest
+
+- name: Cinder Restarting / Enabling
+  service:
+    name: cinder-volume
+    state: restarted
+    enabled: true

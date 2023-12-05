@@ -1,0 +1,39 @@
+# Neutron
+- name: Install Neutron packages
+  yum:
+    name:
+      - openstack-neutron-linuxbridge
+      - ebtables
+      - ipset
+    state: present
+
+- name: Neutron Starting / Enabling
+  service:
+    name: neutron-linuxbridge-agent
+    state: started
+    enabled: true
+
+# Horizon
+- name: Install Horizon packages
+  yum:
+    name: openstack-dashboard
+    state: present
+
+- name: Horizon Restarting / Enabling
+  service:
+    name: memcached
+    state: restarted
+    enabled: true
+
+# Cinder
+- name: Install Cinder packages
+  yum:
+    name:
+      - openstack-cinder
+    state: present
+
+- name: Cinder Starting / Enabling
+  service:
+    name: openstack-cinder-api
+    state: started
+    enabled: true
